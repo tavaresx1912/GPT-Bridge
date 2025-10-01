@@ -1,10 +1,9 @@
-const input_usário = document.getElementById('input_usário');
+document.addEventListener("DOMContentLoaded", function () {
+  const input_usuário = document.querySelector(".btn-submit");
+  const mensagem = document.getElementById("resposta-chat");
 
-alert('Bem-vindo ao site!');
-
-input_usário.addEventListener('input', function() {
-    alert('O usuário digitou: ' + input_usário.value);
+  input_usuário.addEventListener("click", function (e) {
+    e.preventDefault();
+    mensagem.classList.remove("apagar");
+  });
 });
-
-# USUÁRIO ESCOLHEU A OPÇAÕ : X
-# ELE ESCREVEU : Y
