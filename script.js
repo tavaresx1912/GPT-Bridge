@@ -12,7 +12,6 @@ input_usuário.addEventListener("input", function(){
 
 document.addEventListener("DOMContentLoaded", function () {
   botaoEnviar.addEventListener("click", function (e) {
-    e.preventDefault();
     resposta.classList.remove("apagar");
   });
 });
