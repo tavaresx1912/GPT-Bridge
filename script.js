@@ -1,9 +1,18 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const input_usuário = document.querySelector(".btn-submit");
-  const mensagem = document.getElementById("resposta-chat");
+const input_usuário = document.getElementById("mensagem");
+const botaoEnviar = document.querySelector(".btn-submit");
+const resposta = document.getElementById("resposta-chat");
 
-  input_usuário.addEventListener("click", function (e) {
+input_usuário.addEventListener("input", function(){
+  if(input_usuário.value.trim() !== ""){
+    botaoEnviar.classList.remove("apagar")
+  }else{
+    botaoEnviar.classList.add("apagar")
+  }
+})
+
+document.addEventListener("DOMContentLoaded", function () {
+  botaoEnviar.addEventListener("click", function (e) {
     e.preventDefault();
-    mensagem.classList.remove("apagar");
+    resposta.classList.remove("apagar");
   });
 });

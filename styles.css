@@ -1,8 +1,49 @@
-.apagar{
+html, body {
+    font-family: "Public Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    display: flex;
+    flex: 1;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    border: none;
+}
+
+.input-selector{
     display: none;
 }
 
-.container{
+
+.navbar {
+    background-color: rgba(255, 79, 0, 100);
+}
+
+.apagar {
+    display: none;
+}
+
+.container {
+    display: flex;
     width: 100%;
-    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.rodape {
+    background-color: rgba(0, 59, 113, 100);
+    text-align: center;
+    padding: 15px;
+    margin-top: auto;
 }
