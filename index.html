@@ -24,14 +24,7 @@
       <nav class="navbar">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              height="30"
-              fill="currentColor"
-              class="bi bi-bootstrap"
-              viewBox="0 0 16 16"
-            >
+             <img src="logo.svg" alt="logo" width="30" heigth="30"/>
               <path
                 d="M5.062 12h3.475c1.804 0 2.888-.908 2.888-2.396 0-1.102-.761-1.916-1.904-2.034v-.1c.832-.14 1.482-.93 1.482-1.816 0-1.3-.955-2.11-2.542-2.11H5.062zm1.313-4.875V4.658h1.78c.973 0 1.542.457 1.542 1.237 0 .802-.604 1.23-1.764 1.23zm0 3.762V8.162h1.822c1.236 0 1.887.463 1.887 1.348 0 .896-.627 1.377-1.811 1.377z"
               />
@@ -39,15 +32,10 @@
                 d="M0 4a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4zm4-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V4a3 3 0 0 0-3-3z"
               />
             </svg>
-            Bootstrap
+           GPTBridge
           </a>
         </div>
-      </nav>
-    </header>
-
-    <main>
-      <form class="container" action="api_gpt.php" method="post">
-        <div class="input-selector">
+         <div class="input-selector">
           <input
             type="text"
             class="form-control"
@@ -60,7 +48,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Dropdown
+            OPÇÃO
           </button>
 
           <ul class="dropdown-menu dropdown-menu-end">
@@ -84,7 +72,12 @@
               >
             </li>
           </ul>
-        </div>
+         </div>
+      </nav>
+    </header>
+
+   <main>
+      <form class="container" action="api_gpt.php" method="post">
         <div class="input-group">
           <input
             id="mensagem"
@@ -96,18 +89,7 @@
             placeholder="Escreva sua pergunta aqui"
           />
           <button class="btn-submit apagar" type="submit" value="Submit">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="25"
-              height="25"
-              fill="currentColor"
-              class="bi bi-arrow-up-circle-fill"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"
-              />
-            </svg>
+            <button type="button">Envia</button>
           </button>
         </div>
       </form>
@@ -115,7 +97,7 @@
         SÓ DEVE APARECER DEPOIS QUE O USUÁRIO CLICAR NO BOTÃO SUBMIT
       </span>
     </main>
-
+  
     <footer class="rodape">
       <div class="card">
         <div class="card-header">Featured</div>
