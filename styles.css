@@ -18,15 +18,29 @@ main {
 }
 
 button {
-    border: none;
+  border: none;
+  background-color: rgba(11, 66, 121, 100);
+  color: white; 
+  cursor: pointer; 
+  padding: 8px 16px; 
+  border-radius: 5px; 
+  transition: background-color 0.3s ease; 
+}
+button:hover {
+  background-color: rgba(146, 197, 247, 100);
 }
 
-.input-selector{
-    display: none;
+.input-selector {
+  position: fixed;
+  top: 15px;    
+  right: 20px;   
+  display: flex;
+  gap: 8px;      
+  z-index: 1000;
 }
 
 .navbar {
-    background-color: rgba(255, 79, 0, 100);
+    background-color: rgba(11, 66, 121, 100);
 }
 
 .apagar {
@@ -41,7 +55,7 @@ button {
 }
 
 .rodape {
-    background-color: rgba(0, 59, 113, 100);
+    background-color: rgba(11, 66, 121, 100);
     text-align: center;
     padding: 15px;
     margin-top: auto;
