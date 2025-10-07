@@ -11,3 +11,4 @@ Estado atual do projeto
 Pré-requisitos
 - PHP 8+ instalado (para rodar um servidor embutido e o endpoint em PHP).
 - Navegador moderno.
+
