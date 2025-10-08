@@ -72,6 +72,18 @@
 
    <main>
       <form class="container" action="api_gpt.php" method="post">
+        <div class="mb-3">
+          <label for="opcao" class="form-label">Selecione uma opção:</label>
+          <select class="form-select" id="opcao" name="opcao" required>
+            <option value="" selected disabled>Escolha uma opção</option>
+            <option value="chat">Chat de Perguntas e Respostas</option>
+            <option value="resumo">Gerador de Resumos</option>
+            <option value="termos">Explicador de Termos Acadêmicos</option>
+            <option value="corretor">Corretor de Texto Básico</option>
+            <option value="ideias">Sugestão de Ideas para Trabalho</option>
+          </select>
+        </div>
+
         <div class="input-group">
           <input
             id="mensagem"
@@ -81,6 +93,7 @@
             aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-default"
             placeholder="Escreva sua pergunta aqui"
+            required
           />
           <button class="btn-submit apagar" type="submit" value="Submit">Envia</button>
         </div>

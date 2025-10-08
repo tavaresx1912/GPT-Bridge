@@ -1,9 +1,9 @@
-const input_usuário = document.getElementById("mensagem");
+const input_usuario = document.getElementById("mensagem");
 const botaoEnviar = document.querySelector(".btn-submit");
 const resposta = document.getElementById("resposta-chat");
 
-input_usuário.addEventListener("input", function(){
-  if(input_usuário.value.trim() !== ""){
+input_usuario.addEventListener("input", function(){
+  if(input_usuario.value.trim() !== ""){
     botaoEnviar.classList.remove("apagar")
   }else{
     botaoEnviar.classList.add("apagar")
