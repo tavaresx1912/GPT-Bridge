@@ -4,7 +4,7 @@ header('Content-Type: application/json, charset=utf-8');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $API_KEY_OPENAI = "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";
+    $API_KEY_OPENAI = getenv('OPENAI_API_KEY');
 
     $prompt = $_POST['mensagem'];
     $opcao = $_POST['opcao'];
