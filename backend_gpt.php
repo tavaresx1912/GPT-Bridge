@@ -45,16 +45,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ];
     
     $validacao = call_openai($validate_messages, $API_KEY_OPENAI);
-    
-    if(!$validacao) {
-    echo json_encode([
-        "valid" => false,
-        "opcao" => $opcao,
-        "prompt" => $prompt,
-        "mensagem" => "O gpt considerou que não faz sentindo a mensagem, tente novamente"
-    ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-    exit;
-}
+
+    if ((strtolower(trim($validacao)) !== 'true')) {
+        http_response_code(403);
+        echo json_encode([
+            "valid" => false,
+            "opcao" => $opcao,
+            "prompt" => $prompt,
+            "mensagem" => "O GPT considerou que a mensagem não faz sentido. Acesso bloqueado para essa requisição."
+        ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        exit; // importante: garante que nada mais execute
+    }
 
 
     switch ($opcao) {
@@ -86,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $resposta = call_openai($final_messages, $API_KEY_OPENAI);
 
     echo json_encode([
-        "valid" => false,
+        "valid" => true,
         "opcao" => $opcao,
         "prompt" => $prompt,
         "mensagem" => $resposta
