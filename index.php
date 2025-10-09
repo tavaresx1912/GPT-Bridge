@@ -16,8 +16,14 @@ if ($resposta_gpt || $erro) {
 // Verifica se o formulário foi enviado via método POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // Chave da API do OpenAI (IMPORTANTE: Em produção, mova para variável de ambiente)
-    $API_KEY_OPENAI = "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";
+    // Chave da API do OpenAI via variável de ambiente (nunca faça commit de segredos)
+    $API_KEY_OPENAI = getenv('OPENAI_API_KEY') ?: '';
+
+    if (!$API_KEY_OPENAI) {
+        $_SESSION['erro'] = "Configuração ausente: defina a variável de ambiente OPENAI_API_KEY no servidor.";
+        header("Location: index.php");
+        exit;
+    }
 
     // Captura os dados enviados pelo formulário
     $prompt = $_POST['mensagem'];

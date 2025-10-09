@@ -5,6 +5,13 @@ header('Content-Type: application/json, charset=utf-8');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $API_KEY_OPENAI = getenv('OPENAI_API_KEY');
+    if (!$API_KEY_OPENAI) {
+        http_response_code(500);
+        echo json_encode([
+            "error" => "Configuração ausente: defina a variável de ambiente OPENAI_API_KEY no servidor."
+        ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        exit;
+    }
 
     $prompt = $_POST['mensagem'];
     $opcao = $_POST['opcao'];
