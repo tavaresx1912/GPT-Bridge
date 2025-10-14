@@ -17,7 +17,7 @@ if ($resposta_gpt || $erro) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Chave da API do OpenAI via variável de ambiente (nunca faça commit de segredos)
-    $API_KEY_OPENAI = getenv('OPENAI_API_KEY') ?: '';
+    $API_KEY_OPENAI = "";
 
     if (!$API_KEY_OPENAI) {
         $_SESSION['erro'] = "Configuração ausente: defina a variável de ambiente OPENAI_API_KEY no servidor.";
@@ -35,6 +35,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      * @param string $API_KEY_OPENAI - Chave da API
      * @return string - Resposta do GPT
      */
+
+    function sql_docker($opcao, $prompt){};
+
     function call_openai($mensagem, $API_KEY_OPENAI) {
         // Inicializa uma sessão cURL para a API do OpenAI
         $curl = curl_init("https://api.openai.com/v1/chat/completions");
@@ -83,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $validacao = call_openai($validate_messages, $API_KEY_OPENAI);
 
     // Verifica se a validação retornou algo diferente de "true"
-    if (strtolower(trim($validacao)) !== 'true') {
+    if ($validacao !== 'true') {
         // Armazena mensagem de erro na sessão
         $_SESSION['erro'] = "O GPT considerou que a mensagem não faz sentido. Acesso bloqueado para essa requisição.";
     } else {
