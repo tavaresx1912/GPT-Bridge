@@ -17,7 +17,8 @@ if ($resposta_gpt || $erro) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Chave da API do OpenAI via variável de ambiente (nunca faça commit de segredos)
-    $API_KEY_OPENAI = "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";
+    $apiKey = getenv("OPENAI_API_KEY");
+
 
     if (!$API_KEY_OPENAI) {
         $_SESSION['erro'] = "Configuração ausente: defina a variável de ambiente OPENAI_API_KEY no servidor.";
