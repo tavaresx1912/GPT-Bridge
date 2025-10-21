@@ -17,7 +17,7 @@ if ($resposta_gpt || $erro) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Chave da API do OpenAI via variável de ambiente (nunca faça commit de segredos)
-    $API_KEY_OPENAI = "";
+    $API_KEY_OPENAI = "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";
 
     if (!$API_KEY_OPENAI) {
         $_SESSION['erro'] = "Configuração ausente: defina a variável de ambiente OPENAI_API_KEY no servidor.";
@@ -28,7 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Captura os dados enviados pelo formulário
     $prompt = $_POST['mensagem'];
     $opcao = $_POST['opcao'];
-
     /**
      * Função que faz a chamada para a API do OpenAI
      * @param array $mensagem - Array com as mensagens para enviar ao GPT
@@ -36,7 +35,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      * @return string - Resposta do GPT
      */
 
-    function sql_docker($opcao, $prompt){};
+    function sql_docker($opcao, $mensagem, $resposta){
+        // Altere esta linha de volta para o IP local
+        $servername = "127.0.0.1";
+        $username = "appuser";
+        $password = "apppass";
+        $database = "appdb";
+        $port = 3306; // É uma boa prática definir a porta também
+
+        try {
+            // Adicione a porta ao DSN (string de conexão)
+            $conn = new PDO("mysql:host=$servername;port=$port;dbname=$database;charset=utf8mb4", $username, $password);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            // O resto do seu código está perfeito
+            $stmt = $conn->prepare("INSERT INTO mensagens (opcao, mensagem, resposta) VALUES (:opcao, :mensagem, :resposta)");
+            $stmt->bindParam(':opcao', $opcao);
+            $stmt->bindParam(':mensagem', $mensagem);
+            $stmt->bindParam(':resposta', $resposta);
+
+            $stmt->execute();
+            $conn = null;
+            return true;
+        } catch (PDOException $e) {
+            error_log("Erro MySQL: " . $e->getMessage());
+            return false;
+        }
+    }
 
     function call_openai($mensagem, $API_KEY_OPENAI) {
         // Inicializa uma sessão cURL para a API do OpenAI
@@ -87,8 +112,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Verifica se a validação retornou algo diferente de "true"
     if ($validacao !== 'true') {
-        // Armazena mensagem de erro na sessão
-        $_SESSION['erro'] = "O GPT considerou que a mensagem não faz sentido. Acesso bloqueado para essa requisição.";
+        switch ($opcao) {
+            case 'chat':
+                $system_prompt = "Você é um assistente virtual que responde perguntas sobre tecnologia em português.";
+                break;
+            case 'resumo':
+                $system_prompt = "Você é um assistente virtual que responde perguntas sobre o mundo da tecnologia. Responda com um resumo em português.";
+                break;
+            case 'termos':
+                $system_prompt = "Você é um assistente virtual que responde perguntas sobre o mundo da tecnologia. Responda explicando termos técnicos em português.";
+                break;
+            case 'corretor':
+                $system_prompt = "Você é um assistente virtual que responde perguntas sobre o mundo da tecnologia. Responda com uma correção de texto em português.";
+                break;
+            case 'ideias':
+                $system_prompt = "Você é um assistente virtual que responde perguntas sobre o mundo da tecnologia. Responda com ideias criativas em português.";
+                break;
+            default:
+                // Se a opção não for válida, armazena erro
+                $_SESSION['erro'] = "Opção inválida";
+        }
     } else {
         // SEGUNDA CHAMADA: Processamento real da requisição
         // Define o prompt do sistema de acordo com a opção selecionada
@@ -123,6 +166,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Chama o GPT e armazena a resposta na sessão
             $_SESSION['resposta'] = call_openai($final_messages, $API_KEY_OPENAI);
+
+            sql_docker($opcao, $prompt, $_SESSION['resposta']);
         }
     }
 
